@@ -1,0 +1,23 @@
+# dependencies and build output
+node_modules/
+dist/
+.astro/
+
+# test and gate output
+coverage/
+test-results/
+playwright-report/
+.design-suite/reports/
+__pycache__/
+*.pyc
+
+# environment
+.env
+.env.*
+!.env.example
+
+# editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
