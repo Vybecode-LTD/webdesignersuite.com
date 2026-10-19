@@ -1,5 +1,6 @@
 # webdesignersuite.com: Astro builds the static site, Caddy serves it.
-# Railway builds this file (railway.toml sets the builder and the health check).
+# Railway builds this file. The service's builder, health check and restart policy are set on
+# the service itself (docs/DEPLOY.md): Railway has deprecated railway.toml.
 
 # --- build -------------------------------------------------------------------
 # The OS codename is pinned: a floating tag that rolls to a new Debian breaks builds silently.
