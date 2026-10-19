@@ -14,6 +14,7 @@
     "check": "astro check",
     "test": "vitest run tests/unit",
     "test:dist": "vitest run tests/dist",
+    "test:http": "vitest run tests/http",
     "test:e2e": "playwright test",
     "gates": "python -B scripts/audit_design.py --strict && python -B scripts/a11y_static.py src --strict && python -B scripts/check_roles.py src/styles/tokens.css && python -B scripts/perf_audit.py dist --src src"
   },
