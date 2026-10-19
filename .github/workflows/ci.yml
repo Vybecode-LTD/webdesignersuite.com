@@ -51,3 +51,29 @@ jobs:
           name: playwright-report
           path: playwright-report/
           if-no-files-found: ignore
+
+  # The image Railway builds, run as Railway runs it, with the Caddyfile's rules
+  # checked over HTTP (tests/http). The same suite runs against staging.
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - run: npm ci
+      - name: build the image
+        run: docker build --build-arg PUBLIC_SITE_ENV=staging -t site .
+      - name: run it as Railway does
+        run: |
+          docker run -d --name site -e PORT=8080 -p 8080:8080 site
+          npx wait-on http://127.0.0.1:8080/healthz -t 30000
+      - name: the server's rules over HTTP
+        run: npm run test:http
+        env:
+          SITE_URL: http://127.0.0.1:8080
+      - name: the server's log
+        if: failure()
+        run: docker logs site

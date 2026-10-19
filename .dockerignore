@@ -1,0 +1,15 @@
+node_modules
+dist
+.astro
+.git
+.github
+tests
+scripts
+dev plans
+docs
+coverage
+test-results
+playwright-report
+*.log
+.env
+.env.*

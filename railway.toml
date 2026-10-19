@@ -1,0 +1,11 @@
+# Read for GitHub-triggered deploys. Check the effective config in the deploy log
+# (a "Path: /healthz" line) rather than trusting this file: see docs/DEPLOY.md.
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/healthz"
+healthcheckTimeout = 60
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 5
