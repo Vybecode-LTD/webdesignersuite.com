@@ -81,7 +81,10 @@ describe(`the server at ${base}`, () => {
     expect(header(reply, 'location')).toBe(to);
   });
 
-  it('redirects www to the bare domain, keeping the path', async () => {
+  // Through Railway's edge a request reaches Caddy only for a domain attached to the service, and a
+  // railway.app URL's certificate can't carry a www.webdesignersuite.com Host. So this runs against the
+  // image (CI) and production, where both domains are attached; on staging it is skipped, not passed.
+  it.skipIf(new URL(base).hostname.endsWith('.up.railway.app'))('redirects www to the bare domain, keeping the path', async () => {
     const reply = await get('/install?x=1', { Host: 'www.webdesignersuite.com' });
     expect(reply.status).toBe(308);
     expect(header(reply, 'location')).toBe('https://webdesignersuite.com/install?x=1');
