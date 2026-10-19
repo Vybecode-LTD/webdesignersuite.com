@@ -1,0 +1,53 @@
+# The site's own checks: types, unit tests, the build, the built output, the
+# smoke tests, and the role-pair contrast the design gates' workflow leaves out.
+# The design, accessibility and performance gates are design-gates.yml, which
+# /pro-web-design-suite:install-gate writes and upgrades: don't edit it by hand.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    # The image built for package.json's playwright (1.64.0): its browsers, and Node.
+    container: mcr.microsoft.com/playwright:v1.64.0-noble
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: python
+        run: apt-get update && apt-get install -y --no-install-recommends python3
+      - run: npm ci
+      - name: role pairs (contrast, light, dark and inverse)
+        run: python3 scripts/check_roles.py src/styles/tokens.css
+      - name: types (astro check)
+        run: npm run check
+      - name: unit tests
+        run: npm test
+      - name: build
+        run: npm run build
+      - name: built output
+        run: npm run test:dist
+      - name: smoke tests
+        run: npm run test:e2e
+        env:
+          CI: 'true'
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          if-no-files-found: ignore

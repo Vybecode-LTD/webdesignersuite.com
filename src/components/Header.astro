@@ -1,0 +1,74 @@
+---
+import { site, nav, publicPath } from '../data/site';
+
+const here = publicPath(Astro.url.pathname);
+---
+
+<header class="site-header page-grid">
+  <div class="cluster cluster--between">
+    <a class="site-header__brand" href="/" aria-current={here === '/' ? 'page' : undefined}>
+      <span class="site-header__bar" aria-hidden="true"></span>
+      <span>{site.name}</span>
+    </a>
+    <nav aria-label="Main">
+      <ul class="cluster" role="list">
+        {
+          nav.map((link) => (
+            <li>
+              <a
+                class="site-header__link"
+                href={link.href}
+                aria-current={here === link.href ? 'page' : undefined}
+                rel={link.external ? 'noopener' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  @layer components {
+    .site-header {
+      padding-block: var(--pad-block-md);
+      border-block-end: var(--stroke-hairline) solid var(--border-subtle);
+    }
+
+    .site-header__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--gap-related);
+      min-block-size: var(--tap-min);
+      font: var(--type-ui);
+      font-weight: var(--weight-semibold);
+      color: var(--fg-strong);
+      text-decoration: none;
+    }
+
+    .site-header__bar {
+      inline-size: var(--mark-bar-inline);
+      block-size: var(--mark-bar-block);
+      background: var(--border-accent);
+      border-radius: var(--radius-full);
+    }
+
+    .site-header__link {
+      display: inline-flex;
+      align-items: center;
+      min-block-size: var(--tap-min);
+      font: var(--type-ui);
+      color: var(--fg-muted);
+      text-decoration: none;
+      transition: color var(--motion-hover);
+    }
+
+    .site-header__link:hover,
+    .site-header__link[aria-current='page'] {
+      color: var(--fg-strong);
+    }
+  }
+</style>

@@ -1,0 +1,45 @@
+/* =========================================================================
+   FONTS — the two families tokens.css names in --font-sans and --font-mono
+   =========================================================================
+
+   Self-hosted and variable-weight. The files are Fontsource's builds of
+   Geist and JetBrains Mono (SIL OFL 1.1, the licences beside them in
+   src/assets/fonts). Geist keeps Fontsource's Latin subset. JetBrains Mono
+   only sets code and labels, so it is cut to ASCII and a few typographic
+   marks (fontTools' subsetter, docs/fonts.md): 31 KB against the 40 KB
+   per-font ceiling. The family names match the tokens, so nothing else names
+   a font. `swap` shows the fallback at once and the page never waits.
+   ========================================================================= */
+
+@layer tokens {
+  @font-face {
+    font-family: "Geist Sans";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../assets/fonts/geist-latin-wght-normal.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  /* Arial scaled to Geist's metrics, so the swap moves no line (CLS). Measured
+     from both files with fontTools: Geist's a-z and space average 0.5233 em,
+     Arial's 0.4817, so size-adjust is 108.64%; Geist's ascender 1.005 and
+     descender 0.295 em, divided by that, give the overrides. */
+  @font-face {
+    font-family: "Geist Sans Fallback";
+    src: local("Arial");
+    size-adjust: 108.64%;
+    ascent-override: 92.5%;
+    descent-override: 27.15%;
+    line-gap-override: 0%;
+  }
+
+  @font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 100 800;
+    font-display: swap;
+    src: url("../assets/fonts/jetbrains-mono-ascii-wght-normal.woff2") format("woff2");
+    unicode-range: U+0020-007E, U+00A0, U+00A9, U+00B7, U+2013-2014, U+2018-2019, U+201C-201D, U+2026, U+2192, U+2713;
+  }
+}

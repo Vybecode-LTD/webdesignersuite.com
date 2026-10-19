@@ -20,16 +20,29 @@ managed-by: session-orchestrator/memory-updater
 
 ## Current State
 
-- **Phase:** 0, planned. Nothing is built yet.
-- **Last completed task:** the plan and the owner's four decisions (2026-10-19, `dev plans/site-plan.md`, `docs/decisions/0001`).
-- **Active task:** phase 1, the foundation: repo, Astro, tokens, layout, CI with the suite's gates, Railway staging.
-- **Coverage:** none yet · **Open bugs:** 0 · **Doc version:** 0.1.0
+- **Phase:** 1, the foundation. Done: the repo (public, decision 0002), Astro 7, the tokens from `new_system.py "#e8440a"`, the
+  layout, header and footer, and CI (`ci.yml` plus the suite's `design-gates.yml`). Left: the Dockerfile and Railway staging
+  (ask before creating the Railway project).
+- **Last completed task:** the foundation PR (2026-10-19, `feat/foundation`).
+- **Plugin findings:** building the site found 7 problems in the plugin (`dev plans/plugin-findings.md`); each has a local fix here.
+- **Tests:** 21 unit, 10 dist, 8 e2e · **Open bugs:** 0 · **Doc version:** 0.2.0
 
 The next agent's brief is `dev plans/NEXT_SESSION_PROMPT.md`.
 
 ## Commands
 
-To be filled in once the project exists (install, dev, build, test, gates).
+From the repo root (Git Bash or cmd; Node 22.22+, Python 3.9+). The detail is `docs/TESTING.md`.
+
+```bash
+npm ci && npx playwright install chromium
+npm run dev                      # http://localhost:4321
+npm run check && npm test        # astro check, Vitest unit
+npm run build && npm run test:dist && npm run test:e2e
+npm run gates                    # audit, a11y static, role pairs, perf static (after a build)
+```
+
+`scripts/` and `.github/workflows/design-gates.yml` are the plugin's `/install-gate` output: upgrade them by rerunning
+`install_gate.py`, never by hand. The site's own checks are `.github/workflows/ci.yml`.
 
 ## Architecture (brief)
 
@@ -48,6 +61,11 @@ To be filled in once the project exists (install, dev, build, test, gates).
 - **Never serve downloads from a Railway bucket:** a bucket can't be made public (Kapture.Tools' lesson).
 - **VybeSite's CLAUDE.md asks before any Railway, DNS or Buffer change.** Phase 2 goes through the owner and VybeSite's sessions.
 - **Never write into OneDrive,** including Documents and Desktop (`C:\DEV\CLAUDE.md`).
+- **The hooks act here:** `.design-suite.json` turns on the plugin's design gate, a11y gate and generated-file guard, so each
+  edit to `src/` is audited. Component code reads Tier-2 roles only; add a role to `tokens.css` rather than read `--space-*`.
+- **Dark only:** `<html data-theme="dark">` is fixed in `Base.astro`; the light theme's tokens exist but nothing switches to them.
+- **Pages are built as files** (`install.html`) and served without the extension; `publicPath()` gives the canonical path.
+- **No inline `<style>` or `<script>`** (`inlineStylesheets: 'never'`), so the CSP needs no `unsafe-inline`; `tests/dist` holds it.
 
 ## Conventions
 
@@ -71,6 +89,11 @@ To be filled in once the project exists (install, dev, build, test, gates).
 ```
 webdesignersuite.com/
 ├── CLAUDE.md                 ← this file
-├── docs/decisions/           ← 0001: the site's architecture, guides, look and scope
-└── dev plans/                ← site-plan.md, NEXT_SESSION_PROMPT.md, README.md
+├── src/                      ← styles/ (the token system), components/, layouts/, pages/, content/ (guides + schema), data/site.ts
+├── scripts/                  ← the suite's gates, vendored by /install-gate
+├── tests/                    ← unit/, dist/, e2e/
+├── .github/workflows/        ← ci.yml (the site's checks), design-gates.yml (the suite's gates)
+├── .design-suite.json        ← the project contract the gates and hooks read
+├── docs/                     ← decisions/ (0001, 0002), TESTING.md, fonts.md
+└── dev plans/                ← site-plan.md, plugin-findings.md, NEXT_SESSION_PROMPT.md, README.md
 ```

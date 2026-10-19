@@ -1,0 +1,35 @@
+{
+  "name": "webdesignersuite.com",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The website of Pro Web Design Suite, the Claude Code plugin.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "vitest run tests/unit",
+    "test:dist": "vitest run tests/dist",
+    "test:e2e": "playwright test",
+    "gates": "python -B scripts/audit_design.py --strict && python -B scripts/a11y_static.py src --strict && python -B scripts/check_roles.py src/styles/tokens.css && python -B scripts/perf_audit.py dist --src src"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "8.0.3",
+    "@astrojs/sitemap": "3.7.4",
+    "astro": "7.3.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@playwright/test": "1.64.0",
+    "axe-core": "4.14.0",
+    "playwright": "1.64.0",
+    "serve": "14.2.6",
+    "typescript": "6.0.3",
+    "vitest": "5.0.4",
+    "wait-on": "9.5.1"
+  }
+}
