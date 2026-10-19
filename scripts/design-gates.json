@@ -1,0 +1,18 @@
+{
+  "plugin": "web-design-suite",
+  "version": "3.6.0",
+  "files": {
+    "a11y_runtime.mjs": "7729f890d54f8e9304cfb4341755410aeb4bc1f512ebd73541abe2268188c78c",
+    "a11y_static.py": "0cd3c3c0e42d8fcac4347f6222a731047f3f94c84a3f942af4f932f4c8558609",
+    "audit_design.py": "166afd474c4b41aa12aa137d91a247267c5ed3a0b1eacea2a2f542ef6e7c2469",
+    "browser_common.mjs": "3d22777ee675d3ade96db4a57706f15ea1b929867fd30962a8a7cdf669434e7a",
+    "check_roles.py": "a6c5da008aaf1ec966da1d46a409a2eefbb0b03c62712a9f7400ba3d85931816",
+    "dtcg.py": "ff1929e6bbb6538462bdf5e304c6c22dbf754e770c2549882cbf882a28bd7ba2",
+    "generate_color_ramp.py": "57e65c29c4ce31a94021fa619a8a02d452020406459d76fd6742e70e2c82f6d1",
+    "measure_vitals.mjs": "897f22fac877fc54752467aeca5d7910549cadd93f7fb6b2b1f90b760a854bac",
+    "perf_audit.py": "171f95c9d609b65a53c01e1551e8b96d4164ec9526a4bcd9c359af334c455733",
+    "project_config.mjs": "a4cb8a2ea656d433fe6b38064ff639544a70e682a5f2d53134081d67d7529deb",
+    "project_config.py": "8f3e93066b1280767c200d596b3a427e802ee8251ac889fa8fad214fc62f064b"
+  },
+  "workflow": "8629ce685a8e52f2e4ad1e20cafafe728cff584ce44322b6fd5edebd6bc847ef"
+}

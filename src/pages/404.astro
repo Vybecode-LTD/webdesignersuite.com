@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" description="There is no page at this address. Go back to the Pro Web Design Suite home page." noindex>
+  <section class="page-grid not-found" aria-labelledby="not-found-title">
+    <div class="stack stack--related">
+      <h1 id="not-found-title">There's no page here</h1>
+      <p>The address may be mistyped, or the page has moved.</p>
+      <p><a href="/">Go to the home page</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  @layer components {
+    .not-found {
+      padding-block: var(--space-section);
+    }
+  }
+</style>

@@ -1,0 +1,54 @@
+---
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer page-grid">
+  <div class="stack stack--related">
+    <p class="site-footer__proof">
+      <span class="site-footer__dot" aria-hidden="true"></span>
+      <a href={site.gatesRun} rel="noopener">This site passes its own gates</a>
+    </p>
+    <nav aria-label="Footer">
+      <ul class="cluster" role="list">
+        <li><a href={site.pluginRepo} rel="noopener">The plugin on GitHub</a></li>
+        <li><a href={site.repo} rel="noopener">This site's source</a></li>
+        <li><a href={`${site.pluginRepo}/security/policy`} rel="noopener">Security</a></li>
+      </ul>
+    </nav>
+    <p class="site-footer__legal">
+      © {year} <a href={site.company.url} rel="noopener">{site.company.name}</a>. The plugin is MIT-licensed.
+    </p>
+  </div>
+</footer>
+
+<style>
+  @layer components {
+    .site-footer {
+      padding-block: var(--space-subsection);
+      font: var(--type-label);
+      color: var(--fg-muted);
+      border-block-start: var(--stroke-hairline) solid var(--border-subtle);
+    }
+
+    .site-footer__proof {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--gap-tight);
+      font: var(--type-ui);
+      color: var(--fg-default);
+    }
+
+    .site-footer__dot {
+      inline-size: var(--mark-dot);
+      block-size: var(--mark-dot);
+      background: var(--fg-success);
+      border-radius: var(--radius-full);
+    }
+
+    .site-footer__legal {
+      color: var(--fg-subtle);
+    }
+  }
+</style>

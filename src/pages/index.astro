@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base>
+  <section class="hero page-grid" aria-labelledby="hero-title">
+    <div class="stack stack--separate u-min-0">
+      <p class="hero__eyebrow">Claude Code plugin</p>
+      <h1 id="hero-title" class="text-display hero__copy">Design systems are style guides nobody enforces. This one has a gate.</h1>
+      <p class="text-lead hero__copy">{site.description}</p>
+      <figure class="stack stack--related u-min-0">
+        <figcaption class="hero__label" id="install-label">Install it in Claude Code</figcaption>
+        <!-- A box that scrolls must be reachable by keyboard (base.css, pre). -->
+        <pre class="hero__install" tabindex="0" role="region" aria-labelledby="install-label"><code>{site.install}</code></pre>
+      </figure>
+      <p><a href={site.pluginRepo} rel="noopener">Read the source and the docs on GitHub</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  @layer components {
+    .hero {
+      padding-block: var(--space-section);
+    }
+
+    /* The prose keeps a reading measure; the install line may use the column. */
+    .hero__copy {
+      max-inline-size: var(--measure-prose);
+    }
+
+    /* On the dark canvas --bg-sunken is the canvas itself, so the command gets
+       the surface and a hairline to read as a box. */
+    .hero__install {
+      background-color: var(--bg-surface);
+      border: var(--stroke-hairline) solid var(--border-default);
+    }
+
+    .hero__eyebrow {
+      font: var(--type-code);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-caps);
+      text-transform: uppercase;
+      color: var(--fg-accent);
+    }
+
+    .hero__label {
+      font: var(--type-label);
+      color: var(--fg-muted);
+    }
+  }
+</style>

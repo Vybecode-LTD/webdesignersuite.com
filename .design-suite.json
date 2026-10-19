@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "tokens": ["src/styles/tokens.css"],
+  "stack": "vanilla-css",
+  "hooks": {
+    "designGate": true,
+    "generatedFiles": true,
+    "a11yGate": true
+  }
+}

@@ -1,0 +1,52 @@
+---
+import '../styles/index.css';
+import geist from '../assets/fonts/geist-latin-wght-normal.woff2?url';
+import mono from '../assets/fonts/jetbrains-mono-ascii-wght-normal.woff2?url';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site, pageTitle, publicPath } from '../data/site';
+
+interface Props {
+  /** The page's own title; the home page leaves it out. */
+  title?: string;
+  description?: string;
+  /** Keep the page out of search even in production (404, drafts). */
+  noindex?: boolean;
+}
+
+const { title, description = site.description, noindex = false } = Astro.props;
+const canonical = new URL(publicPath(Astro.url.pathname), Astro.site);
+// Only production is indexed: staging's railway.app URL must never compete with the real domain.
+const indexable = !noindex && import.meta.env.PUBLIC_SITE_ENV === 'production';
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle(title)}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {!indexable && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={geist} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={mono} as="font" type="font/woff2" crossorigin />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle(title)} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <slot name="head" />
+  </head>
+  <body class="page-shell">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
