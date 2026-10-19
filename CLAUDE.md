@@ -20,12 +20,12 @@ managed-by: session-orchestrator/memory-updater
 
 ## Current State
 
-- **Phase:** 1, the foundation. Done: the repo (public, decision 0002), Astro 7, the tokens from `new_system.py "#e8440a"`, the
-  layout, header and footer, and CI (`ci.yml` plus the suite's `design-gates.yml`). Left: the Dockerfile and Railway staging
-  (ask before creating the Railway project).
-- **Last completed task:** the foundation PR (2026-10-19, `feat/foundation`).
+- **Phase:** 1, the foundation, is done (2026-10-19): the repo (public, decision 0002), Astro 7, the tokens from
+  `new_system.py "#e8440a"`, the layout, header and footer, CI (`ci.yml` plus the suite's `design-gates.yml`), the image
+  (Dockerfile, Caddyfile), and Railway staging at https://site-staging-d036.up.railway.app (decision 0003, `docs/DEPLOY.md`).
+- **Next:** phase 2, the landing page and `/install` (`docs/HANDOFF.md`).
 - **Plugin findings:** building the site found 7 problems in the plugin (`dev plans/plugin-findings.md`); each has a local fix here.
-- **Tests:** 21 unit, 10 dist, 8 e2e · **Open bugs:** 0 · **Doc version:** 0.2.0
+- **Tests:** 21 unit, 10 dist, 8 e2e, 9 HTTP · **Open bugs:** 0 · **Doc version:** 0.3.0
 
 The next agent's brief is `dev plans/NEXT_SESSION_PROMPT.md`.
 
@@ -46,7 +46,8 @@ npm run gates                    # audit, a11y static, role pairs, perf static (
 
 ## Architecture (brief)
 
-- **`site` (Railway):** Astro builds HTML; Caddy serves it with security headers and the www → apex redirect.
+- **`site` (Railway):** Astro builds HTML; Caddy serves it with security headers and the www → apex redirect. The service's
+  settings live on Railway, not in the repo (Railway deprecated `railway.toml`); the ids are in `docs/DEPLOY.md`.
 - **Guides** are MDX in `src/content/guides/`, in series, schema-checked, and checked against the plugin's real commands and skills.
 - **Release data** (version, zip, `SHA256SUMS`, `.skill` files) and the plugin's CHANGELOG are read from GitHub when the site
   builds, so crawlers see them. Downloads always come from GitHub Releases.
@@ -80,6 +81,10 @@ npm run gates                    # audit, a11y static, role pairs, perf static (
 | The plan | `dev plans/site-plan.md` | before any work |
 | Next agent's brief | `dev plans/NEXT_SESSION_PROMPT.md` | starting a session |
 | Decisions | `docs/decisions/` | before re-deciding anything |
+| Current state and next steps | `docs/HANDOFF.md` | starting a session |
+| Deploy: Railway ids, settings, checks | `docs/DEPLOY.md` | before any deploy or Railway change |
+| Tests and gates | `docs/TESTING.md` | before adding a test or changing CI |
+| Plugin bugs found here | `dev plans/plugin-findings.md` | before working around a gate |
 | The plugin | `C:\DEV\Pro-Web-Designer-Suite-Plug-in` | writing a guide or landing-page copy |
 | The blog's platform | `C:\DEV\VybeSite` | phase 2 |
 | The promotion plan | `C:\DEV\Pro-Web-Designer-Suite-Plug-in\dev plans\web-design-suite-distribution-and-promotion.md` | launch work |
