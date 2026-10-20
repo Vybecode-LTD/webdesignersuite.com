@@ -1,6 +1,6 @@
 # Handoff: webdesignersuite.com
 
-**Updated:** 2026-10-19, end of the session that built phase 1, the foundation.
+**Updated:** 2026-10-20. Phase 1, the foundation, was built in the 2026-10-19 session; 2026-10-20 added the plugin's fixes (below).
 
 ## Where it stands
 
@@ -22,7 +22,7 @@
 
 1. **Phase 2:** the landing page and `/install` with real release data (`dev plans/site-plan.md`). Load the plugin's
    landing-page-conversion skill for the copy and section order, and design-critique-gate before showing it.
-2. **The plugin's F1 to F7 are fixed** on its `main` for 4.0.0 (N50, #185 to #187, 2026-10-20), not yet released. When 4.0.0 ships, rerun `/install-gate` here and remove the workarounds (`dev plans/plugin-findings.md`, "When 4.0.0 ships"). N51 (`check_roles` and source order) is open in the plugin.
+2. **The plugin's F1 to F4, F6 and F7 are fixed, and F5 in part,** on its `main` for 4.0.0 (N50, #185 to #187, 2026-10-20), not yet released. When 4.0.0 ships, rerun `/install-gate` here and remove the workarounds (`dev plans/plugin-findings.md`, "When 4.0.0 ships"). N51 (`check_roles` and source order) and the rest of F5 are open in the plugin.
 
 ## Open owner decisions
 
