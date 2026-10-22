@@ -22,7 +22,7 @@
 
 1. **Phase 2:** the landing page and `/install` with real release data (`dev plans/site-plan.md`). Load the plugin's
    landing-page-conversion skill for the copy and section order, and design-critique-gate before showing it.
-2. **The plugin's F1 to F4, F6 and F7 are fixed, and F5 in part,** on its `main` for 4.0.0 (N50, #185 to #187, 2026-10-20), not yet released. When 4.0.0 ships, rerun `/install-gate` here and remove the workarounds (`dev plans/plugin-findings.md`, "When 4.0.0 ships"). N51 (`check_roles` and source order) and the rest of F5 are open in the plugin.
+2. **The plugin's F1 to F4, F6 and F7 are fixed, and F5 in part,** on its `main` for 4.0.0 (N50, #185 to #187, 2026-10-20), not yet released. When 4.0.0 ships, rerun `/install-gate` here and remove the workarounds (`dev plans/plugin-findings.md`, "When 4.0.0 ships"). N51 (`check_roles` and source order) is fixed too, in the plugin's #189 (2026-10-21); the rest of F5 is still open there.
 
 ## Open owner decisions
 
