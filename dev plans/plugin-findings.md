@@ -23,9 +23,13 @@ F2 and F6 are the ones a new user hits first.
 - **F5, the rest:** on the dark theme `--bg-sunken` equals `--bg-canvas`, so anything that relies on it alone, not a `pre`, has no visible
   box. Fixing it means choosing a different dark `--bg-sunken`, which is a look the owner should pick, so it is not a bug fix.
   This site's own code sets nothing on `--bg-sunken` but `pre`.
-- **N51:** `check_roles` resolves each scope's declarations by selector, not by source order (a dark block before a `:root`
-  block gives the dark scope the colour the browser does not use). It is old and not from the fixes above; found in review
-  of #187, scheduled as P57. This site keeps `:root` first, so it is not affected.
+
+## Fixed since, in the plugin
+
+- **N51:** `check_roles` resolved each scope's declarations by selector, not by source order (a dark block before a `:root`
+  block gave the dark scope the colour the browser does not use). Found in review of #187; fixed for 4.0.0 in
+  [#189](https://github.com/Vybecode-LTD/Pro-Web-Designer-Suite-Plug-in/pull/189) (P57, 2026-10-21): a scope's blocks now
+  apply as the cascade does. This site keeps `:root` first, so it was never affected, and nothing here changes.
 
 ## When 4.0.0 ships
 
